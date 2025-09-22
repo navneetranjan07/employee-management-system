@@ -1,11 +1,11 @@
-# Use Java 17 runtime
-FROM openjdk:17-jdk-slim
-
-# Set working directory
+# Step 1: Build the app with Maven
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy jar file (after Maven build)
-COPY target/*.jar app.jar
-
-# Run the jar
+# Step 2: Run the app
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
