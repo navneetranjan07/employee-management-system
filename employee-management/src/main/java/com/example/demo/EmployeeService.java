@@ -37,6 +37,10 @@ public class EmployeeService {
 		if(empl!=null) {
 			empl.setName(emp.getName());
 			empl.setSalary(emp.getSalary());
+			empl.setEmail(emp.getEmail());
+			empl.setPhoneNumber(emp.getPhoneNumber());
+			empl.setDesignation(emp.getDesignation());
+			empl.setDateOfJoining(emp.getDateOfJoining());
 			
 			 repo.save(empl);
 		}else {
